@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="https://jakarta.ee/xml/ns/persistence" version="3.0">
+    <persistence-unit name="myJPAUnit" transaction-type="RESOURCE_LOCAL">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <class>com.youcode.DevSyncV1.entities.User</class>
+        <properties>
+            <!-- JDBC Database connection settings -->
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5433/postgresDevSyncV1"/>
+            <property name="jakarta.persistence.jdbc.user" value="admin"/>
+            <property name="jakarta.persistence.jdbc.password" value="admin"/>
+            <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+            <!-- Hibernate properties -->
+            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+
+        </properties>
+    </persistence-unit>
+</persistence>
