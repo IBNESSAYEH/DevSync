@@ -1,67 +1,53 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <title>DevSync</title>
-</head>
-<body class="bg-light">
-
-<div class="container mt-5 d-flex  flex-column align-items-center ">
-    <h2 class="text-center mb-4">Modifier l'utilisateur</h2>
-    <div class="card p-4 shadow col-11 col-md-8 " >
-            <form action="http://localhost:8081/DevSyncV1_war_exploded/user?action=create" method="post">
-
-                <input type="hidden" name="action" value="create">
-
-                <div class="form-group mb-3">
-                    <label for="username">Nom d'utilisateur</label>
-                    <input type="text" class="form-control" id="username" name="username" placeholder="Entrez le nom d'utilisateur" required>
+<!-- Create User Modal -->
+<div id="createUserModal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="relative w-full max-w-md max-h-full">
+        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+            <div class="flex items-center justify-between p-4 border-b rounded-t">
+                <h3 class="text-xl font-semibold text-gray-900">
+                    Create New User
+                </h3>
+                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 inline-flex justify-center items-center" data-modal-hide="createUserModal">
+                    <svg class="w-3 h-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                    </svg>
+                    <span class="sr-only">Close modal</span>
+                </button>
+            </div>
+            <form action="users/create" method="post" id="createUserForm" class="p-4 md:p-5">
+                <div class="grid gap-4 mb-4">
+                    <div class="col-span-2">
+                        <label for="username" class="block mb-2 text-sm font-medium text-gray-900">Username</label>
+                        <input type="text" name="username" id="username" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" required>
+                    </div>
+                    <div class="col-span-2">
+                        <label for="password" class="block mb-2 text-sm font-medium text-gray-900">Password</label>
+                        <input type="password" name="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" required>
+                    </div>
+                    <div class="col-span-2 sm:col-span-1">
+                        <label for="firstName" class="block mb-2 text-sm font-medium text-gray-900">First Name</label>
+                        <input type="text" name="firstName" id="firstName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" required>
+                    </div>
+                    <div class="col-span-2 sm:col-span-1">
+                        <label for="lastName" class="block mb-2 text-sm font-medium text-gray-900">Last Name</label>
+                        <input type="text" name="lastName" id="lastName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" required>
+                    </div>
+                    <div class="col-span-2">
+                        <label for="email" class="block mb-2 text-sm font-medium text-gray-900">Email</label>
+                        <input type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" required>
+                    </div>
+                    <div class="col-span-2">
+                        <label for="role" class="block mb-2 text-sm font-medium text-gray-900">Role</label>
+                        <select name="role" id="role" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" required>
+                            <option value="">Select role</option>
+                            <option value="MANAGER">MANAGER</option>
+                            <option value="USER">User</option>
+                        </select>
+                    </div>
                 </div>
-
-                <div class="form-group mb-3">
-                    <label for="password">Mot de passe</label>
-                    <input type="password" class="form-control" id="password" name="password" placeholder="Mot de passe" required>
-                </div>
-
-                <div class="form-group mb-3">
-                    <label for="firstName">Prénom</label>
-                    <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Entrez le prénom" required>
-                </div>
-
-                <div class="form-group mb-3">
-                    <label for="lastName">Nom de famille</label>
-                    <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Entrez le nom de famille" required>
-                </div>
-
-                <div class="form-group mb-3">
-                    <label for="email">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" placeholder="Entrez l'email" required>
-                    <small id="emailHelp" class="form-text text-muted">Votre email ne sera jamais partagé.</small>
-                </div>
-
-                <div class="form-group mb-3">
-                    <label for="role">Rôle</label>
-                    <select class="form-select" id="role" name="role" required>
-                        <option value="MANAGER">Admin</option>
-                        <option value="USER">User</option>
-                    </select>
-                </div>
-
-                <div class="form-check mb-4">
-                    <input type="checkbox" class="form-check-input" id="agreeTerms" required>
-                    <label class="form-check-label" for="agreeTerms">J'accepte les conditions d'utilisation</label>
-                </div>
-
-                <button type="submit" class="btn btn-primary w-100">Créer utilisateur</button>
+                <button type="submit" class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center w-full">
+                    Create User
+                </button>
             </form>
+        </div>
     </div>
 </div>
-
-<!-- Inclusion de Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>

@@ -1,58 +1,66 @@
 package com.youcode.DevSyncV1.repository;
 
-
-
 import com.youcode.DevSyncV1.entities.User;
 import jakarta.persistence.*;
-import jakarta.transaction.Transactional;
 import java.util.List;
-import jakarta.enterprise.context.RequestScoped;
 
 public class UserRepository {
 
-    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("myJPAUnit");
+    private EntityManager em;
 
-        public User save(User user) {
-            EntityManager entityManager = emf.createEntityManager();
-            EntityTransaction transaction = entityManager.getTransaction();
-            transaction.begin();
-            entityManager.persist(user);
-            transaction.commit();
-            entityManager.close();
-            return user;
-        }
-
-
-        public User findById(Long id) {
-            EntityManager entityManager = emf.createEntityManager();
-            return entityManager.find(User.class, id);
-        }
-
-        public List<User> findAll() {
-            EntityManager entityManager = emf.createEntityManager();
-            TypedQuery<User> query = entityManager.createQuery("SELECT u FROM User u", User.class);
-            List<User> results = query.getResultList();
-            entityManager.close();
-            return results;
-        }
-
-
-
-        public void delete (User user) {
-            EntityManager entityManager = emf.createEntityManager();
-            EntityTransaction transaction = entityManager.getTransaction();
-            transaction.begin();
-            entityManager.remove(entityManager.contains(user) ? user : entityManager.merge(user));
-            transaction.commit();
-            entityManager.close();
-        }
-
-       public User findByUsername(String username){
-            EntityManager entityManager = emf.createEntityManager();
-            TypedQuery<User> query = entityManager.createQuery("SELECT u FROM User u WHERE u.username = :username", User.class);
-            query.setParameter("username", username);
-            User result = query.getSingleResult();
-            entityManager.close();
-            return result;
-       }
+    public UserRepository(EntityManager em) {
+        this.em = em;
     }
+
+    public User save(User user) {
+        EntityTransaction transaction = em.getTransaction();
+        try {
+            transaction.begin();
+            user = em.merge(user);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction.isActive()) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }
+        return user;
+    }
+
+    public User findById(Long id) {
+        return em.find(User.class, id);
+
+    }
+
+    public List<User> findAll() {
+        TypedQuery<User> query = em.createQuery("SELECT u FROM User u", User.class);
+        return query.getResultList();
+    }
+
+    public void delete(User user) {
+        EntityTransaction transaction = em.getTransaction();
+        try {
+            transaction.begin();
+            user = em.contains(user) ? user : em.merge(user);
+            em.remove(user);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction.isActive()) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }
+    }
+
+    public User findByUsername(String username) {
+        TypedQuery<User> query = em.createQuery("SELECT u FROM User u WHERE u.username = :username", User.class);
+        query.setParameter("username", username);
+        User result = null;
+        try {
+            result = query.getSingleResult();
+        } catch (NoResultException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+}

@@ -3,6 +3,9 @@ package com.youcode.DevSyncV1.servlet;
 import com.youcode.DevSyncV1.entities.User;
 import com.youcode.DevSyncV1.entities.enums.Role;
 import com.youcode.DevSyncV1.service.UserService;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -16,10 +19,14 @@ import java.util.List;
 public class UserServlet extends HttpServlet {
 
     private UserService userService;
+    private EntityManagerFactory emf;
 
     @Override
     public void init() throws ServletException {
-        userService = new UserService();
+        // Initialize EntityManagerFactory and UserService
+        emf = Persistence.createEntityManagerFactory("myJPAUnit");
+        EntityManager entityManager = emf.createEntityManager();
+        userService = new UserService(entityManager);
     }
 
     @Override
@@ -28,10 +35,6 @@ public class UserServlet extends HttpServlet {
 
         if (pathInfo == null || pathInfo.equals("/")) {
             listUsers(request, response);
-        } else if (pathInfo.equals("/create")) {
-            showCreateUserForm(request, response);
-        } else if (pathInfo.equals("/edit")) {
-            getUserById(request, response);
         } else if (pathInfo.equals("/delete")) {
             deleteUser(request, response);
         } else {
@@ -39,28 +42,11 @@ public class UserServlet extends HttpServlet {
         }
     }
 
-    private void showCreateUserForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/assets/createUser.jsp").forward(request, response);
-    }
-
     private void listUsers(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<User> users = userService.getAllUsers();
         request.setAttribute("users", users);
         request.getRequestDispatcher("/assets/listUsers.jsp").forward(request, response);
     }
-
-    private void getUserById(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Long id = Long.parseLong(request.getParameter("id"));
-        User user = userService.getUserById(id);
-
-        if (user != null) {
-            request.setAttribute("user", user);
-            request.getRequestDispatcher("/assets/updateUser.jsp").forward(request, response);
-        } else {
-            response.sendError(HttpServletResponse.SC_NOT_FOUND);
-        }
-    }
-
 
     private void deleteUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Long id = Long.parseLong(request.getParameter("id"));
@@ -83,12 +69,38 @@ public class UserServlet extends HttpServlet {
             return;
         }
 
+
         if (pathInfo.equals("/create")) {
             createUser(request, response);
+        } else if (pathInfo.equals("/delete")) {
+            deleteUser(request, response);
         } else if (pathInfo.equals("/update")) {
             updateUser(request, response);
         } else {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid action");
+        }
+    }
+
+    private void updateUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String idParam = request.getParameter("id");
+        Long id = Long.parseLong(idParam);
+
+
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        String firstName = request.getParameter("firstName");
+        String lastName = request.getParameter("lastName");
+        String email = request.getParameter("email");
+        Role role = Role.valueOf(request.getParameter("role"));
+
+        User newUser = new User(username, password, firstName, lastName, email, role);
+
+        User user = userService.updateUser(newUser, id);
+        if (user != null) {
+            request.setAttribute("user", user);
+            response.sendRedirect(request.getContextPath() + "/users");
+        } else {
+            response.sendError(HttpServletResponse.SC_NOT_FOUND);
         }
     }
 
@@ -106,29 +118,10 @@ public class UserServlet extends HttpServlet {
         response.sendRedirect(request.getContextPath() + "/users");
     }
 
-    private void updateUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Long id = Long.parseLong(request.getParameter("id"));
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        String firstName = request.getParameter("firstName");
-        String lastName = request.getParameter("lastName");
-        String email = request.getParameter("email");
-        Role role = Role.valueOf(request.getParameter("role"));
-
-        User user = userService.getUserById(id);
-        if (user != null) {
-            user.setUsername(username);
-            if (password != null && !password.isEmpty()) {
-                user.setPassword(password); // In a real app, you'd hash this password
-            }
-            user.setFirstName(firstName);
-            user.setLastName(lastName);
-            user.setEmail(email);
-            user.setRole(role);
-            userService.updateUser(user);
-            response.sendRedirect(request.getContextPath() + "/users");
-        } else {
-            response.sendError(HttpServletResponse.SC_NOT_FOUND);
+    @Override
+    public void destroy() {
+        if (emf != null) {
+            emf.close();
         }
     }
 }

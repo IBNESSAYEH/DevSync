@@ -2,17 +2,18 @@ package com.youcode.DevSyncV1.service;
 
 import com.youcode.DevSyncV1.entities.User;
 import com.youcode.DevSyncV1.repository.UserRepository;
-import jakarta.inject.Inject;
-import jakarta.transaction.Transactional;
+import jakarta.persistence.EntityManager;
+
 import java.util.List;
-import jakarta.enterprise.context.RequestScoped;
 
-@RequestScoped
-public class UserService
-{
+public class UserService {
 
-    private UserRepository userRepository = new UserRepository();
+    private UserRepository userRepository;
 
+
+    public UserService(EntityManager entityManager) {
+        this.userRepository = new UserRepository(entityManager);
+    }
 
     public User createUser(User user) {
         return userRepository.save(user);
@@ -26,12 +27,20 @@ public class UserService
         return userRepository.findAll();
     }
 
-    @Transactional
-    public User updateUser(User user) {
-        return userRepository.save(user);
+    public User updateUser(User user, Long id) {
+        User existingUser = userRepository.findById(id);
+        if (existingUser != null) {
+            existingUser.setId(id);
+            existingUser.setUsername(user.getUsername());
+            existingUser.setFirstName(user.getFirstName());
+            existingUser.setLastName(user.getLastName());
+            existingUser.setEmail(user.getEmail());
+            existingUser.setRole(user.getRole());
+            return userRepository.save(existingUser);
+        }
+        return null;
     }
 
-    @Transactional
     public void deleteUser(Long id) {
         User user = userRepository.findById(id);
         if (user != null) {

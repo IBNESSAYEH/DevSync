@@ -1,86 +1,144 @@
 <%@ page import="com.youcode.DevSyncV1.entities.User" %>
-<%@ page import="java.util.List" %><%--
-  Created by IntelliJ IDEA.
-  User: Youcode
-  Date: 10/1/2024
-  Time: 5:03 PM
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <title>DevSync</title>
+    <title>DevSync - User Management</title>
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-light">
+<body class="bg-gray-50">
+<jsp:include page="navbar.jsp" />
 
-<div class="container mt-5">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2 class="text-center">Liste des utilisateurs</h2>
-        <div class="text-center">
-            <form action="assets/createUser.jsp" method="get">
-                <button type="submit" class="btn btn-primary">Créer un utilisateur</button>
-            </form>
-        </div>
+<div class="container mx-auto px-4 py-8">
+    <div class="flex justify-between items-center mb-6">
+        <h1 class="text-2xl font-bold text-gray-900">User Management</h1>
+        <button type="button"
+                data-modal-target="createUserModal"
+                data-modal-toggle="createUserModal"
+                class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+            Add New User
+        </button>
     </div>
 
-    <div class="table-responsive">
-        <table class="table table-bordered table-hover">
-            <thead class="table-dark">
+    <!-- Users Table -->
+    <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
+        <table class="w-full text-sm text-left text-gray-500">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50">
             <tr>
-                <th>ID</th>
-                <th>Nom d'utilisateur</th>
-                <th>Prénom</th>
-                <th>Nom de famille</th>
-                <th>Email</th>
-                <th>Rôle</th>
-                <th>Actions</th>
+                <th scope="col" class="px-6 py-3">ID</th>
+                <th scope="col" class="px-6 py-3">Username</th>
+                <th scope="col" class="px-6 py-3">First Name</th>
+                <th scope="col" class="px-6 py-3">Last Name</th>
+                <th scope="col" class="px-6 py-3">Email</th>
+                <th scope="col" class="px-6 py-3">Role</th>
+                <th scope="col" class="px-6 py-3">Actions</th>
             </tr>
             </thead>
             <tbody>
-            <%
-                List<User> users = (List<User>) request.getAttribute("users");
+            <% List<User> users = (List<User>) request.getAttribute("users");
                 if (users != null) {
-                    for (User user : users) {
-            %>
-            <tr>
-                <td><%= user.getId() %></td>
-                <td><%= user.getUsername() %></td>
-                <td><%= user.getFirstName() %></td>
-                <td><%= user.getLastName() %></td>
-                <td><%= user.getEmail() %></td>
-                <td><%= user.getRole() %></td>
-                <td>
-                    <div class="d-flex justify-content-around align-items-center">
-                        <!-- Edit User Form -->
-                        <form action="users/edit" method="get" style="display:inline;">
+                    for (User user : users) { %>
+            <tr class="bg-white border-b hover:bg-gray-50">
+                <td class="px-6 py-4"><%= user.getId() %></td>
+                <td class="px-6 py-4"><%= user.getUsername() %></td>
+                <td class="px-6 py-4"><%= user.getFirstName() %></td>
+                <td class="px-6 py-4"><%= user.getLastName() %></td>
+                <td class="px-6 py-4"><%= user.getEmail() %></td>
+                <td class="px-6 py-4"><%= user.getRole() %></td>
+                <td class="px-6 py-4">
+                    <div class="flex space-x-2">
+                        <button type="button"
+                                class="text-blue-600 hover:underline"
+                                data-modal-target="updateUserModal"
+                                data-modal-toggle="updateUserModal"
+                                data-user-id="<%= user.getId() %>"
+                                data-user-username="<%= user.getUsername() %>"
+                                data-user-firstname="<%= user.getFirstName() %>"
+                                data-user-lastname="<%= user.getLastName() %>"
+                                data-user-email="<%= user.getEmail() %>"
+                                data-user-role="<%= user.getRole() %>">
+                            Edit
+                        </button>
+
+                        <div id="updateUserModal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                            <div class="relative w-full max-w-md max-h-full">
+                                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                                    <div class="flex items-center justify-between p-4 border-b rounded-t">
+                                        <h3 class="text-xl font-semibold text-gray-900">
+                                            Update User
+                                        </h3>
+                                        <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 inline-flex justify-center items-center" data-modal-hide="updateUserModal">
+                                            <svg class="w-3 h-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                                            </svg>
+                                            <span class="sr-only">Close modal</span>
+                                        </button>
+                                    </div>
+                                    <form action="users/update" method="post" id="createUserForm" class="p-4 md:p-5">
+                                        <input type="hidden" name="id" id="id" value="<%= user.getId() %>">
+                                        <div class="grid gap-4 mb-4">
+                                            <div class="col-span-2">
+                                                <label for="username" class="block mb-2 text-sm font-medium text-gray-900">Username</label>
+                                                <input type="text" name="username" id="username" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" required>
+                                            </div>
+                                            <div class="col-span-2">
+                                                <label for="password" class="block mb-2 text-sm font-medium text-gray-900">Password</label>
+                                                <input type="password" name="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" required>
+                                            </div>
+                                            <div class="col-span-2 sm:col-span-1">
+                                                <label for="firstName" class="block mb-2 text-sm font-medium text-gray-900">First Name</label>
+                                                <input type="text" name="firstName" id="firstName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" required>
+                                            </div>
+                                            <div class="col-span-2 sm:col-span-1">
+                                                <label for="lastName" class="block mb-2 text-sm font-medium text-gray-900">Last Name</label>
+                                                <input type="text" name="lastName" id="lastName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" required>
+                                            </div>
+                                            <div class="col-span-2">
+                                                <label for="email" class="block mb-2 text-sm font-medium text-gray-900">Email</label>
+                                                <input type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" required>
+                                            </div>
+                                            <div class="col-span-2">
+                                                <label for="role" class="block mb-2 text-sm font-medium text-gray-900">Role</label>
+                                                <select name="role" id="role" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" required>
+                                                    <option value="">Select role</option>
+                                                    <option value="MANAGER">MANAGER</option>
+                                                    <option value="USER">User</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center w-full">
+                                            Update User
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <form action="users/delete" method="post" >
                             <input type="hidden" name="id" value="<%= user.getId() %>">
-                            <button type="submit" class="btn btn-primary">Modifier</button>
+                            <button type="submit"
+                                    class="text-red-600 hover:underline">
+                                Delete
+                            </button>
                         </form>
-                        <!-- Delete User Form -->
-                        <form action="users/delete" method="get" style="display:inline;">
-                            <input type="hidden" name="id" value="<%= user.getId() %>">
-                            <button type="submit" class="btn btn-danger">Supprimer</button>
-                        </form>
+
+
                     </div>
                 </td>
-
-
             </tr>
-            <%
-                    }
-                }
-            %>
+            <% }} %>
             </tbody>
         </table>
     </div>
-
 </div>
 
-<!-- Inclusion de Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+
+<jsp:include page="createUser.jsp" />
+
+
+<script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
+<script src="../js/userManagement.js"></script>
 </body>
 </html>
