@@ -10,18 +10,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="096d5848-42e5-4fb7-b63b-16d3c658c6ef" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/assets/navbar.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/logo.webp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/taskCreation.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/images/welcome.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/youcode/DevSyncV1/entities/Tag.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/youcode/DevSyncV1/entities/Task.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/youcode/DevSyncV1/servlet/TaskServlet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/youcode/DevSyncV1/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/youcode/DevSyncV1/repository/UserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/youcode/DevSyncV1/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/youcode/DevSyncV1/service/UserService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/youcode/DevSyncV1/servlet/UserServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/youcode/DevSyncV1/servlet/UserServlet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/assets/createUser.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/createUser.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/assets/listUsers.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/listUsers.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/assets/updateUser.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/updateUser.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/index.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,8 +28,8 @@
       <list>
         <option value="Enum" />
         <option value="com.intellij.jpb.FlywayMigrationScript" />
-        <option value="Class" />
         <option value="Jsp File" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -73,39 +68,39 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "JUnit.All in DevSyncV1.executor": "Run",
-    "Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor": "Run",
-    "Maven.DevSyncV1 [clean,install].executor": "Run",
-    "Maven.DevSyncV1 [clean].executor": "Run",
-    "Maven.DevSyncV1 [compile].executor": "Run",
-    "Maven.DevSyncV1 [deploy].executor": "Run",
-    "Maven.DevSyncV1 [install].executor": "Run",
-    "Maven.DevSyncV1 [package].executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "Tomcat Server.Tomcat 10.1.30.executor": "Run",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Youcode/IdeaProjects/DevSyncV1/src/main/webapp/images",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;JUnit.All in DevSyncV1.executor&quot;: &quot;Run&quot;,
+    &quot;Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.DevSyncV1 [clean,install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.DevSyncV1 [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.DevSyncV1 [compile].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.DevSyncV1 [deploy].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.DevSyncV1 [install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.DevSyncV1 [package].executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Tomcat Server.Tomcat 10.1.30.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Youcode/IdeaProjects/DevSyncV1/src/main/webapp/images&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "postgresql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;postgresql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Youcode\IdeaProjects\DevSyncV1\src\main\webapp\images" />
@@ -350,7 +345,8 @@
       <workItem from="1727960327042" duration="793000" />
       <workItem from="1727962625077" duration="3437000" />
       <workItem from="1728029877982" duration="4192000" />
-      <workItem from="1728214774972" duration="17335000" />
+      <workItem from="1728214774972" duration="18335000" />
+      <workItem from="1728291040510" duration="6845000" />
     </task>
     <servers />
   </component>
