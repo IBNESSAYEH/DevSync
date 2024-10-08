@@ -1,7 +1,11 @@
 package com.youcode.DevSyncV1.repository;
 
 import com.youcode.DevSyncV1.entities.User;
-import jakarta.persistence.*;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.NoResultException;
+import jakarta.persistence.TypedQuery;
+
 import java.util.List;
 
 public class UserRepository {

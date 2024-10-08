@@ -20,7 +20,6 @@ public class UserServlet extends HttpServlet {
 
     private UserService userService;
     private EntityManagerFactory emf;
-
     @Override
     public void init() throws ServletException {
         emf = Persistence.createEntityManagerFactory("myJPAUnit");
