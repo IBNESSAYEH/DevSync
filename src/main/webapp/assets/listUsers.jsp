@@ -23,7 +23,6 @@
         </button>
     </div>
 
-    <!-- Users Table -->
     <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
         <table class="w-full text-sm text-left text-gray-500">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50">
@@ -135,7 +134,7 @@
 </div>
 
 
-<jsp:include page="createUser.jsp" />
+<jsp:include page="createUserModal.jsp" />
 
 
 <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>

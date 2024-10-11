@@ -2,7 +2,7 @@ package com.youcode.DevSyncV1.servlet;
 
 import com.youcode.DevSyncV1.entities.User;
 import com.youcode.DevSyncV1.entities.enums.Role;
-import com.youcode.DevSyncV1.service.UserService;
+import com.youcode.DevSyncV1.service.implementation.UserServiceImpl;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
@@ -11,6 +11,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.util.List;
@@ -18,13 +19,13 @@ import java.util.List;
 @WebServlet(name = "UserServlet", value = "/users/*")
 public class UserServlet extends HttpServlet {
 
-    private UserService userService;
+    private UserServiceImpl userService;
     private EntityManagerFactory emf;
     @Override
     public void init() throws ServletException {
         emf = Persistence.createEntityManagerFactory("myJPAUnit");
         EntityManager entityManager = emf.createEntityManager();
-        userService = new UserService(entityManager);
+        userService = new UserServiceImpl(entityManager);
     }
 
     @Override
@@ -33,7 +34,9 @@ public class UserServlet extends HttpServlet {
 
         if (pathInfo == null || pathInfo.equals("/")) {
             listUsers(request, response);
-        } else if (pathInfo.equals("/delete")) {
+        }else   if (pathInfo == null || pathInfo.equals("/login")) {
+            request.getRequestDispatcher("/assets/login.jsp").forward(request, response);
+        }else if (pathInfo.equals("/delete")) {
             deleteUser(request, response);
         } else {
             response.sendError(HttpServletResponse.SC_NOT_FOUND);
@@ -72,10 +75,31 @@ public class UserServlet extends HttpServlet {
             createUser(request, response);
         } else if (pathInfo.equals("/delete")) {
             deleteUser(request, response);
+        }else   if (pathInfo.equals("/login")) {
+            loginUser(request, response);
         } else if (pathInfo.equals("/update")) {
             updateUser(request, response);
         } else {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid action");
+        }
+    }
+
+    private void loginUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
+
+        User user = userService.login(email, password);
+
+        if (user != null && user.getPassword().equals(password)) {
+
+            HttpSession session = request.getSession();
+            session.setAttribute("user", user);
+
+
+            response.sendRedirect(request.getContextPath() + "/tasks");
+        } else {
+            request.setAttribute("errorMessage", "Invalid email or password.");
+            request.getRequestDispatcher("assets/login.jsp").forward(request, response);
         }
     }
 

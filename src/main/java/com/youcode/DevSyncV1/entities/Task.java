@@ -2,6 +2,7 @@ package com.youcode.DevSyncV1.entities;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -27,15 +28,18 @@ public class Task {
             joinColumns = @JoinColumn(name = "task_id"),
             inverseJoinColumns = @JoinColumn(name = "tag_id")
     )
+
     private Set<Tag> tags = new HashSet<>();
 
     private boolean completed;
 
-    @Column(name = "assigned_to")
-    private String assignedTo;
+    @ManyToOne
+    @JoinColumn(name = "assigned_to")
+    private User assignedTo;
 
-    @Column(name = "created_by")
-    private String createdBy;
+    @ManyToOne
+    @JoinColumn(name = "created_by")
+    private User createdBy;
 
     private int tokens;
 
@@ -43,13 +47,13 @@ public class Task {
     public Task() {
     }
 
-    public Task(String title, String description, LocalDateTime dueDate, Set<Tag> tags, String createdBy) {
+    public Task(String title, String description, LocalDateTime dueDate, Set<Tag> tags) {
         if (dueDate.isBefore(LocalDateTime.now())) {
             throw new IllegalArgumentException("La tâche ne peut pas être créée dans le passé.");
         }
-        if (tags.size() < 2) {
-            throw new IllegalArgumentException("Veuillez entrer au moins deux tags.");
-        }
+//        if (tags.size() < 2) {
+//            throw new IllegalArgumentException("Veuillez entrer au moins deux tags.");
+//        }
         if (dueDate.isAfter(LocalDateTime.now().plusDays(3))) {
             throw new IllegalArgumentException("La planification des tâches est limitée à 3 jours à l'avance.");
         }
@@ -58,8 +62,6 @@ public class Task {
         this.description = description;
         this.dueDate = dueDate;
         this.tags = new HashSet<>(tags);
-        this.createdBy = createdBy;
-        this.assignedTo = createdBy;
         this.completed = false;
         this.tokens = 2;
     }
@@ -113,19 +115,42 @@ public class Task {
         this.completed = true;
     }
 
-    public String getAssignedTo() {
+    public User getAssignedTo() {
         return assignedTo;
     }
 
-    public void assignTo(String user) {
-        if (!user.equals(this.assignedTo)) {
-            throw new IllegalArgumentException("Un utilisateur peut attribuer des tâches uniquement à lui-même.");
-        }
+    public void assignTo(User user) {
         this.assignedTo = user;
     }
 
     public int getTokens() {
         return tokens;
+    }
+
+    public User getCreatedBy() {
+        return createdBy;
+    }
+
+
+
+    public void setTokens(int tokens) {
+        this.tokens = tokens;
+    }
+
+    public void setCreatedBy(User createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public void setAssignedTo(User assignedTo) {
+        this.assignedTo = assignedTo;
+    }
+
+    public void setCompleted(boolean completed) {
+        this.completed = completed;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public void replaceTask(Task newTask) {

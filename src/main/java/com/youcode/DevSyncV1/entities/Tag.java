@@ -17,7 +17,6 @@ public class Tag {
     @ManyToMany(mappedBy = "tags")
     private Set<Task> tasks = new HashSet<>();
 
-    // Constructeur
     public Tag() {
     }
 

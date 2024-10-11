@@ -17,7 +17,7 @@
     <div class="w-full md:w-5/12 p-8">
         <h1 class="text-4xl font-bold mb-4">Welcome MR Developer to DevSync Task Manager!</h1>
         <p class="text-lg text-gray-600 mb-4">We are delighted to have you here. Explore our services and feel free to reach out for any inquiries.</p>
-        <a href="#services" class="inline-block bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-300">Get Started</a>
+        <a href="users/login" class="inline-block bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-300">Login</a>
     </div>
 
     <!-- Right Side (Image) -->
