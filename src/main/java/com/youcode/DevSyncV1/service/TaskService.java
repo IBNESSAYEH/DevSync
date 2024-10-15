@@ -12,4 +12,6 @@ public interface TaskService {
     void deleteTask(long taskId);
     List<Task> findTasksByUser(String username);
     List<Task> findTasksByTag(String tagName);
+    boolean updateReplacementOrder(long taskId);
+    boolean AcceptReplacementOrder(long taskId);
 }

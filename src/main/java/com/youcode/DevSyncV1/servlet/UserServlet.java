@@ -14,18 +14,16 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 
 @WebServlet(name = "UserServlet", value = "/users/*")
 public class UserServlet extends HttpServlet {
 
     private UserServiceImpl userService;
-    private EntityManagerFactory emf;
     @Override
     public void init() throws ServletException {
-        emf = Persistence.createEntityManagerFactory("myJPAUnit");
-        EntityManager entityManager = emf.createEntityManager();
-        userService = new UserServiceImpl(entityManager);
+        userService = new UserServiceImpl();
     }
 
     @Override
@@ -133,8 +131,10 @@ public class UserServlet extends HttpServlet {
         String lastName = request.getParameter("lastName");
         String email = request.getParameter("email");
         Role role = Role.valueOf(request.getParameter("role"));
+        LocalDate date = LocalDate.now();
 
         User newUser = new User(username, password, firstName, lastName, email, role);
+
         userService.createUser(newUser);
 
         response.sendRedirect(request.getContextPath() + "/users");
@@ -142,8 +142,8 @@ public class UserServlet extends HttpServlet {
 
     @Override
     public void destroy() {
-        if (emf != null) {
-            emf.close();
-        }
+        EntityManagerFactory emf = (EntityManagerFactory) getServletContext().getAttribute("emf");
+        EntityManager em = emf.createEntityManager();
+        em.close();
     }
 }

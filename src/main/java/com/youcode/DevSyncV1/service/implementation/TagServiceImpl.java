@@ -12,8 +12,8 @@ public class TagServiceImpl implements TagService {
 
     private TagRepository tagRepository;
 
-    public TagServiceImpl(EntityManager entityManager) {
-        this.tagRepository = new TagRepositoryImpl(entityManager);
+    public TagServiceImpl() {
+        this.tagRepository = new TagRepositoryImpl();
     }
 
     @Override

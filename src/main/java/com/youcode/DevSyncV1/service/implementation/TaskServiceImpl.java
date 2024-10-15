@@ -12,8 +12,8 @@ public class TaskServiceImpl implements TaskService {
 
     private TaskRepositoryImpl taskRepository;
 
-    public TaskServiceImpl(EntityManager entityManager) {
-        this.taskRepository = new TaskRepositoryImpl(entityManager);
+    public TaskServiceImpl() {
+        this.taskRepository = new TaskRepositoryImpl();
     }
 
     @Override
@@ -28,7 +28,11 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public Task createTask(Task task) {
+
         validateTaskCreation(task);
+        task.setDeletingOrder(false);
+        task.setReplacementOrder(false);
+        task.setReplacementPossibility(true);
         return taskRepository.save(task);
     }
 
@@ -74,4 +78,10 @@ public class TaskServiceImpl implements TaskService {
             throw new IllegalArgumentException("At least two tags are required for each task.");
         }
     }
+
+    @Override
+    public boolean updateReplacementOrder(long taskId) {
+        return taskRepository.updateReplacementOrder(taskId);
+    }
+    public boolean AcceptReplacementOrder(long taskId){return taskRepository.AcceptReplacementOrder(taskId);}
 }

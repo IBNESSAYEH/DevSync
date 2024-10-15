@@ -2,6 +2,8 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.youcode.DevSyncV1.entities.Task" %>
 <%@ page import="com.youcode.DevSyncV1.entities.Tag" %>
+<%@ page import="com.youcode.DevSyncV1.entities.enums.Role" %>
+<%@ page import="java.time.LocalDateTime" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -52,7 +54,15 @@
                 <td class="px-6 py-4"><%= task.getTitle() %></td>
                 <td class="px-6 py-4"><%= task.getDescription() %></td>
                 <td class="px-6 py-4"><%= task.getDueDate() %></td>
-                <td class="px-6 py-4"><%= task.isCompleted() ? "Completed" : "not yet" %></td>
+                <%
+                    if ( task.getDueDate().isBefore(LocalDateTime.now()) && !task.isCompleted()) {
+                %>
+                <td class="px-6 py-4 bg-red-700">canceled</td>
+                <% } else { %>
+                <td class="px-6 py-4"><%= task.isCompleted() ? "Completed" : "in progress" %></td>
+
+                <% } %>
+
 
                 <td class="px-6 py-4"><%= task.getAssignedTo().getFirstName() + task.getAssignedTo().getLastName()%></td>
                 <td class="px-6 py-4"><%= task.getCreatedBy().getFirstName() + task.getCreatedBy().getLastName()%></td>
@@ -92,19 +102,20 @@
                                         <!-- Title -->
                                         <div class="mb-4">
                                             <label for="title" class="block text-sm font-medium text-gray-900 dark:text-white">Title</label>
-                                            <input type="text" id="title" name="title" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:text-white" placeholder="Task title" required>
+                                            <input type="text" id="title" value="<%= task.getTitle() %>" name="title" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:text-white" placeholder="Task title" required>
                                         </div>
 
 
                                         <div class="mb-4">
                                             <label for="description" class="block text-sm font-medium text-gray-900 dark:text-white">Description</label>
-                                            <textarea id="description" name="description" rows="3" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:text-white" placeholder="Task description" required></textarea>
+                                            <textarea id="description"  name="description" rows="3" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:text-white" placeholder="Task description" required></textarea>
+                                            <%= task.getDescription() %>
                                         </div>
 
 
                                         <div class="mb-4">
                                             <label for="dueDate" class="block text-sm font-medium text-gray-900 dark:text-white">Due Date</label>
-                                            <input type="datetime-local" id="dueDate" name="dueDate" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:text-white" required>
+                                            <input type="datetime-local" value="<%= task.getDueDate() %>" id="dueDate" name="dueDate" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:text-white" required>
                                         </div>
 
 
@@ -146,14 +157,46 @@
                                 </div>
                             </div>
                         </div>
-                        
+
+                        <% User sessionUser = (User) request.getAttribute("user");
+                            if (Integer.parseInt(sessionUser.getJetonParMois()) > 0 ) {
+                        %>
+
                         <form action="tasks/delete" method="post">
                             <input type="hidden" name="taskId" value="<%= task.getId() %>">
                             <button type="submit"
                                     class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">
-                                <i class="fas fa-trash"></i>
+                                    <i class="fas fa-trash"></i>
                             </button>
                         </form>
+                        <% } %>
+
+                        <%
+                            if (task.getReplacementPossibility() && task.getReplacementOrder()  && (Role) sessionUser.getRole() == Role.MANAGER) {
+                        %>
+                        <form action="tasks/acceptReplacement" method="post">
+                            <input type="hidden" name="taskId" value="<%= task.getId() %>">
+                            <button type="submit"
+                                    class="focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-900">
+                                <i class="fas fa-exchange-alt"></i>
+                            </button>
+                        </form>
+                        <% } %>
+                        <%
+                            if (Integer.parseInt(sessionUser.getJetonParJour()) > 0) {
+                        %>
+                        <form action="tasks/replace" method="post">
+                            <input type="hidden" name="taskId" value="<%= task.getId() %>">
+                            <button type="submit"
+                                    class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-900">
+                                <i class="fas fa-exchange-alt"></i>
+                            </button>
+                        </form>
+                        <% } %>
+
+                        <%
+                            if ( task.getDueDate().isAfter(LocalDateTime.now()) && !task.isCompleted() ) {
+                        %>
 
                         <form action="tasks/completed" method="post">
                             <input type="hidden" name="taskId" value="<%= task.getId() %>">
@@ -162,6 +205,7 @@
                                 <i class="fas fa-check"></i>
                             </button>
                         </form>
+                        <% } %>
 
 
                     </div>

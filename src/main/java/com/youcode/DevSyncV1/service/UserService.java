@@ -7,4 +7,6 @@ import java.util.List;
 public interface UserService {
     User getUserById(Long id);
     List<User> getAllUsers();
+    boolean updateUserJetonRemplacement(Long id);
+    boolean updateUserJetonParMois(Long id);
 }

@@ -5,6 +5,7 @@ import com.youcode.DevSyncV1.repository.implementation.UserRepositoryImpl;
 import com.youcode.DevSyncV1.service.UserService;
 import jakarta.persistence.EntityManager;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class UserServiceImpl implements UserService {
@@ -12,12 +13,25 @@ public class UserServiceImpl implements UserService {
     private UserRepositoryImpl userRepository;
 
 
-    public UserServiceImpl(EntityManager entityManager) {
-        this.userRepository = new UserRepositoryImpl(entityManager);
+    public UserServiceImpl() {
+        this.userRepository = new UserRepositoryImpl();
     }
 
+
     public User createUser(User user) {
+        if (user.getJetonParJour() == null) {
+            user.setJetonParJour("2");
+        }
+        if (user.getJetonParMois() == null) {
+            user.setJetonParMois("1");
+        }
         return userRepository.save(user);
+    }
+    public boolean updateUserJetonRemplacement(Long id) {
+        return userRepository.updateUserJetonRemplacement(id);
+    }
+    public boolean updateUserJetonParMois(Long id) {
+        return userRepository.updateUserJetonParMois(id);
     }
 
     public User getUserById(Long id) {
@@ -32,15 +46,20 @@ public class UserServiceImpl implements UserService {
         return userRepository.findAll();
     }
 
+
     public User updateUser(User user, Long id) {
         User existingUser = userRepository.findById(id);
         if (existingUser != null) {
-            existingUser.setId(id);
             existingUser.setUsername(user.getUsername());
+            existingUser.setPassword(user.getPassword());
             existingUser.setFirstName(user.getFirstName());
             existingUser.setLastName(user.getLastName());
             existingUser.setEmail(user.getEmail());
             existingUser.setRole(user.getRole());
+            existingUser.setJetonParJour("2");
+            existingUser.setJetonParMois("1");
+            existingUser.setManager(user.getManager());
+            existingUser.setDateOfFirstReplacementOrder(user.getDateOfFirstReplacementOrder() != null ? user.getDateOfFirstReplacementOrder() : LocalDateTime.now());
             return userRepository.save(existingUser);
         }
         return null;

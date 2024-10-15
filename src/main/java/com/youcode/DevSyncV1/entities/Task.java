@@ -11,7 +11,6 @@ import java.util.Set;
 @Entity
 @Table(name = "tasks")
 public class Task {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -21,6 +20,12 @@ public class Task {
 
     @Column(name = "due_date")
     private LocalDateTime dueDate;
+    @Column(name = "replacement_order")
+    private Boolean replacementOrder;
+    @Column(name = "deleting_order")
+    private Boolean deletingOrder;
+    @Column(name = "replacement_possibility")
+    private Boolean replacementPossibility;
 
     @ManyToMany
     @JoinTable(
@@ -28,7 +33,6 @@ public class Task {
             joinColumns = @JoinColumn(name = "task_id"),
             inverseJoinColumns = @JoinColumn(name = "tag_id")
     )
-
     private Set<Tag> tags = new HashSet<>();
 
     private boolean completed;
@@ -47,29 +51,20 @@ public class Task {
     public Task() {
     }
 
-    public Task(String title, String description, LocalDateTime dueDate, Set<Tag> tags) {
-        if (dueDate.isBefore(LocalDateTime.now())) {
-            throw new IllegalArgumentException("La tâche ne peut pas être créée dans le passé.");
-        }
-//        if (tags.size() < 2) {
-//            throw new IllegalArgumentException("Veuillez entrer au moins deux tags.");
-//        }
-        if (dueDate.isAfter(LocalDateTime.now().plusDays(3))) {
-            throw new IllegalArgumentException("La planification des tâches est limitée à 3 jours à l'avance.");
-        }
-
+    public Task(String title, String description, LocalDateTime dueDate, User createdBy, int tokens) {
         this.title = title;
         this.description = description;
         this.dueDate = dueDate;
-        this.tags = new HashSet<>(tags);
-        this.completed = false;
-        this.tokens = 2;
+        this.createdBy = createdBy;
+        this.tokens = tokens;
     }
-
-
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -96,6 +91,30 @@ public class Task {
         this.dueDate = dueDate;
     }
 
+    public Boolean getReplacementOrder() {
+        return replacementOrder;
+    }
+
+    public void setReplacementOrder(Boolean replacementOrder) {
+        this.replacementOrder = replacementOrder;
+    }
+
+    public Boolean getDeletingOrder() {
+        return deletingOrder;
+    }
+
+    public void setDeletingOrder(Boolean deletingOrder) {
+        this.deletingOrder = deletingOrder;
+    }
+
+    public Boolean getReplacementPossibility() {
+        return replacementPossibility;
+    }
+
+    public void setReplacementPossibility(Boolean replacementPossibility) {
+        this.replacementPossibility = replacementPossibility;
+    }
+
     public Set<Tag> getTags() {
         return tags;
     }
@@ -108,60 +127,31 @@ public class Task {
         return completed;
     }
 
-    public void completeTask() {
-        if (LocalDateTime.now().isAfter(dueDate)) {
-            throw new IllegalArgumentException("Vous devez marquer la tâche comme terminée avant la date limite.");
-        }
-        this.completed = true;
+    public void setCompleted(boolean completed) {
+        this.completed = completed;
     }
 
     public User getAssignedTo() {
         return assignedTo;
     }
 
-    public void assignTo(User user) {
-        this.assignedTo = user;
-    }
-
-    public int getTokens() {
-        return tokens;
+    public void setAssignedTo(User assignedTo) {
+        this.assignedTo = assignedTo;
     }
 
     public User getCreatedBy() {
         return createdBy;
     }
 
-
-
-    public void setTokens(int tokens) {
-        this.tokens = tokens;
-    }
-
     public void setCreatedBy(User createdBy) {
         this.createdBy = createdBy;
     }
 
-    public void setAssignedTo(User assignedTo) {
-        this.assignedTo = assignedTo;
+    public int getTokens() {
+        return tokens;
     }
 
-    public void setCompleted(boolean completed) {
-        this.completed = completed;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void replaceTask(Task newTask) {
-        if (this.assignedTo.equals(newTask.assignedTo) || tokens <= 0) {
-            throw new IllegalArgumentException("Vous n'avez pas assez de jetons pour remplacer cette tâche.");
-        }
-        this.assignedTo = newTask.assignedTo;
-        this.tokens--; // Deduct a token for replacement
-    }
-
-    public void deleteTask() {
-        // Implementation for deletion logic
+    public void setTokens(int tokens) {
+        this.tokens = tokens;
     }
 }

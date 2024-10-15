@@ -18,4 +18,6 @@ public interface UserRepository {
      void delete(User user);
 
      User findByUsername(String username);
+     boolean updateUserJetonRemplacement(Long id);
+     boolean updateUserJetonParMois(Long id);
 }
