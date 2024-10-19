@@ -1,6 +1,7 @@
 package com.youcode.DevSyncV1.service.implementation;
 
 import com.youcode.DevSyncV1.entities.User;
+import com.youcode.DevSyncV1.repository.UserRepository;
 import com.youcode.DevSyncV1.repository.implementation.UserRepositoryImpl;
 import com.youcode.DevSyncV1.service.UserService;
 import jakarta.persistence.EntityManager;
@@ -12,13 +13,23 @@ public class UserServiceImpl implements UserService {
 
     private UserRepositoryImpl userRepository;
 
-
     public UserServiceImpl() {
+
         this.userRepository = new UserRepositoryImpl();
+    }
+    public UserServiceImpl(UserRepositoryImpl userRepository) {
+        this.userRepository = userRepository;
     }
 
 
     public User createUser(User user) {
+        if (user == null || user.equals(new User()) ) {
+            throw new ValidatObjectExeption("User cannot be null");
+        }
+        User existingUser = userRepository.findByEmail(user.getEmail());
+        if (existingUser != null) {
+            throw new ValidatObjectExeption("User with email already exists");
+        }
         if (user.getJetonParJour() == null) {
             user.setJetonParJour("2");
         }

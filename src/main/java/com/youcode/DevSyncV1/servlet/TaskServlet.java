@@ -12,6 +12,7 @@ import com.youcode.DevSyncV1.service.implementation.UserServiceImpl;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
+import jakarta.servlet.FilterChain;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -46,6 +47,7 @@ public class TaskServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         List<Task> tasks = taskService.findAll();
         List<User> users = userService.getAllUsers();
         List<Tag> tags = getAllTags(request, response);
@@ -272,4 +274,6 @@ public class TaskServlet extends HttpServlet {
     private List<Tag> getAllTags(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         return tagService.findAll();
     }
+
+
 }

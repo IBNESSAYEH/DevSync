@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "users")
@@ -155,7 +156,16 @@ public class User {
         this.role = role;
     }
 
-//    public User getManager() {
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(getId(), user.getId()) && Objects.equals(getUsername(), user.getUsername()) && Objects.equals(getPassword(), user.getPassword()) && Objects.equals(getJetonParJour(), user.getJetonParJour()) && Objects.equals(getDateOfFirstReplacementOrder(), user.getDateOfFirstReplacementOrder()) && Objects.equals(getJetonParMois(), user.getJetonParMois()) && Objects.equals(getFirstName(), user.getFirstName()) && Objects.equals(getLastName(), user.getLastName()) && Objects.equals(getEmail(), user.getEmail()) && getRole() == user.getRole() && Objects.equals(getManager(), user.getManager()) && Objects.equals(tasks, user.tasks) && Objects.equals(assignedTasks, user.assignedTasks);
+    }
+
+
+    //    public User getManager() {
 //        return manager;
 //    }
 //

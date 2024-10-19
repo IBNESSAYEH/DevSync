@@ -10,29 +10,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="096d5848-42e5-4fb7-b63b-16d3c658c6ef" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/youcode/DevSyncV1/entities/TaskChange.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/youcode/DevSyncV1/entities/enums/ChangeType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/b2949e71-fe95-4f66-9241-297b0e553f3e.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/b2949e71-fe95-4f66-9241-297b0e553f3e.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/b2949e71-fe95-4f66-9241-297b0e553f3e/storage_v2/_src_/database/postgresDevSyncV1.cltOAg/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/b2949e71-fe95-4f66-9241-297b0e553f3e/storage_v2/_src_/database/postgresDevSyncV1.cltOAg/schema/public.abK9xQ.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/youcode/DevSyncV1/filter/AuthenticationFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/youcode/DevSyncV1/service/implementation/ValidatObjectExeption.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/youcode/DevSyncV1/service/implementation/UserServiceImplTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/youcode/DevSyncV1/entities/Tag.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/youcode/DevSyncV1/entities/Tag.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/youcode/DevSyncV1/entities/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/youcode/DevSyncV1/entities/Task.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/youcode/DevSyncV1/entities/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/youcode/DevSyncV1/entities/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/youcode/DevSyncV1/entities/update-schema.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/youcode/DevSyncV1/repository/TaskRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/youcode/DevSyncV1/repository/TaskRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/youcode/DevSyncV1/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/youcode/DevSyncV1/repository/UserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/youcode/DevSyncV1/repository/implementation/TagRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/youcode/DevSyncV1/repository/implementation/TagRepositoryImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/youcode/DevSyncV1/repository/implementation/TaskRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/youcode/DevSyncV1/repository/implementation/TaskRepositoryImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/youcode/DevSyncV1/repository/implementation/UserRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/youcode/DevSyncV1/repository/implementation/UserRepositoryImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/youcode/DevSyncV1/service/TaskService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/youcode/DevSyncV1/service/TaskService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/youcode/DevSyncV1/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/youcode/DevSyncV1/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/youcode/DevSyncV1/service/implementation/TagServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/youcode/DevSyncV1/service/implementation/TagServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/youcode/DevSyncV1/service/implementation/TaskServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/youcode/DevSyncV1/service/implementation/TaskServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/youcode/DevSyncV1/service/implementation/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/youcode/DevSyncV1/service/implementation/UserServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/youcode/DevSyncV1/servlet/TaskServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/youcode/DevSyncV1/servlet/TaskServlet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/youcode/DevSyncV1/servlet/UserServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/youcode/DevSyncV1/servlet/UserServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/assets/tasks.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/assets/tasks.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,8 +32,9 @@
       <list>
         <option value="com.intellij.jpb.FlywayMigrationScript" />
         <option value="Jsp File" />
-        <option value="Class" />
         <option value="Enum" />
+        <option value="JUnit5 Test Class" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -88,6 +77,21 @@
   "keyToString": {
     "Application.TaskRepositoryImpl.executor": "Run",
     "JUnit.All in DevSyncV1.executor": "Run",
+    "JUnit.UserServiceImplTest$CreateUser.shouldCreateUserWithDefaultValues.executor": "Run",
+    "JUnit.UserServiceImplTest$UpdateUserJetonRemplacement.executor": "Run",
+    "JUnit.UserServiceImplTest.addUser_ShouldAddUser_WhenUserIsValid.executor": "Run",
+    "JUnit.UserServiceImplTest.addUser_ShouldThrowIllegalArgumentException_WhenUserIsNull.executor": "Run",
+    "JUnit.UserServiceImplTest.addUser_ShouldThrowValidateObjectExeption_WhenUserIsEmpty.executor": "Run",
+    "JUnit.UserServiceImplTest.addUser_ShouldThrowValidateObjectExeption_WhenUserIsExiste.executor": "Run",
+    "JUnit.UserServiceImplTest.deleteUser.executor": "Run",
+    "JUnit.UserServiceImplTest.executor": "Run",
+    "JUnit.UserServiceImplTest.getUserById.executor": "Run",
+    "JUnit.UserServiceImplTest.testAvailableUserByIdTrue.executor": "Run",
+    "JUnit.UserServiceImplTest.testGetUserById.executor": "Run",
+    "JUnit.UserServiceImplTest.testGetUserById_Success.executor": "Run",
+    "JUnit.UserServiceImplTest.testGetUserById_UserExists.executor": "Run",
+    "JUnit.UserServiceTest.createUser.executor": "Run",
+    "JUnit.UserServiceTest.executor": "Run",
     "Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor": "Run",
     "Maven.DevSyncV1 [clean,install].executor": "Run",
     "Maven.DevSyncV1 [clean].executor": "Run",
@@ -101,7 +105,9 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "Smart Tomcat.Tomcat: DevSyncV1.executor": "Run",
-    "Tomcat Server.Tomcat 10.1.30.executor": "Run",
+    "Tomcat Server.Tomcat 10.1.30.executor": "Debug",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
     "git-widget-placeholder": "DevSyncV2",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/Youcode/IdeaProjects/DevSyncV1/src/main/webapp/images",
@@ -113,7 +119,7 @@
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
@@ -123,6 +129,9 @@
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.youcode.DevSyncV1.service.implementation" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Youcode\IdeaProjects\DevSyncV1\src\main\webapp\images" />
     </key>
@@ -132,17 +141,94 @@
       <recent name="C:\Users\Youcode\IdeaProjects\DevSyncV1\src\main\webapp" />
       <recent name="C:\Users\Youcode\IdeaProjects\DevSyncV1\src\main\java.com.example.devsync" />
     </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="com.youcode.DevSyncV1.service.implementation" />
+    </key>
   </component>
   <component name="RunAnythingCache">
     <option name="myCommands">
       <command value="mvn clean install" />
     </option>
   </component>
-  <component name="RunManager" selected="Tomcat Server.Tomcat 10.1.30">
-    <configuration name="All in DevSyncV1" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.UserServiceImplTest.addUser_ShouldThrowValidateObjectExeption_WhenUserIsExiste">
+    <configuration name="UserServiceImplTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="DevSyncV1" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="TEST_OBJECT" value="package" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.youcode.DevSyncV1.service.implementation.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.youcode.DevSyncV1.service.implementation" />
+      <option name="MAIN_CLASS_NAME" value="com.youcode.DevSyncV1.service.implementation.UserServiceImplTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserServiceImplTest.addUser_ShouldAddUser_WhenUserIsValid" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="DevSyncV1" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.youcode.DevSyncV1.service.implementation.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.youcode.DevSyncV1.service.implementation" />
+      <option name="MAIN_CLASS_NAME" value="com.youcode.DevSyncV1.service.implementation.UserServiceImplTest" />
+      <option name="METHOD_NAME" value="addUser_ShouldAddUser_WhenUserIsValid" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserServiceImplTest.addUser_ShouldThrowIllegalArgumentException_WhenUserIsNull" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="DevSyncV1" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.youcode.DevSyncV1.service.implementation.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.youcode.DevSyncV1.service.implementation" />
+      <option name="MAIN_CLASS_NAME" value="com.youcode.DevSyncV1.service.implementation.UserServiceImplTest" />
+      <option name="METHOD_NAME" value="addUser_ShouldThrowIllegalArgumentException_WhenUserIsNull" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserServiceImplTest.addUser_ShouldThrowValidateObjectExeption_WhenUserIsEmpty" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="DevSyncV1" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.youcode.DevSyncV1.service.implementation.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.youcode.DevSyncV1.service.implementation" />
+      <option name="MAIN_CLASS_NAME" value="com.youcode.DevSyncV1.service.implementation.UserServiceImplTest" />
+      <option name="METHOD_NAME" value="addUser_ShouldThrowValidateObjectExeption_WhenUserIsEmpty" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserServiceImplTest.addUser_ShouldThrowValidateObjectExeption_WhenUserIsExiste" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="DevSyncV1" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.youcode.DevSyncV1.service.implementation.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.youcode.DevSyncV1.service.implementation" />
+      <option name="MAIN_CLASS_NAME" value="com.youcode.DevSyncV1.service.implementation.UserServiceImplTest" />
+      <option name="METHOD_NAME" value="addUser_ShouldThrowValidateObjectExeption_WhenUserIsExiste" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -306,39 +392,22 @@
         </option>
       </method>
     </configuration>
-    <configuration name="Tomcat: DevSyncV1" type="com.poratu.idea.plugins.tomcat" temporary="true">
-      <predefined_log_file enabled="true" id="Tomcat Localhost Log" />
-      <predefined_log_file enabled="true" id="Tomcat Access Log" />
-      <predefined_log_file id="Tomcat Catalina Log" />
-      <predefined_log_file id="Tomcat Manager Log" />
-      <predefined_log_file id="Tomcat Host Manager Log" />
-      <option name="catalinaBase" value="" />
-      <option name="contextPath" value="/DevSyncV1" />
-      <option name="docBase" value="$PROJECT_DIR$/src/main/webapp" />
-      <option name="extraClassPath" value="" />
-      <option name="tomcatInfo">
-        <TomcatInfo>
-          <option name="name" value="Apache Tomcat/10.1.30" />
-          <option name="path" value="$PROJECT_DIR$/../../../../Program Files/Apache Software Foundation/Tomcat 10.1" />
-          <option name="version" value="10.1.30.0" />
-        </TomcatInfo>
-      </option>
-      <option name="vmOptions" value="" />
-      <module name="DevSyncV1" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <list>
-      <item itemvalue="JUnit.All in DevSyncV1" />
+      <item itemvalue="JUnit.UserServiceImplTest.addUser_ShouldAddUser_WhenUserIsValid" />
+      <item itemvalue="JUnit.UserServiceImplTest.addUser_ShouldThrowIllegalArgumentException_WhenUserIsNull" />
+      <item itemvalue="JUnit.UserServiceImplTest.addUser_ShouldThrowValidateObjectExeption_WhenUserIsEmpty" />
+      <item itemvalue="JUnit.UserServiceImplTest.addUser_ShouldThrowValidateObjectExeption_WhenUserIsExiste" />
+      <item itemvalue="JUnit.UserServiceImplTest" />
       <item itemvalue="Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate]" />
-      <item itemvalue="Smart Tomcat.Tomcat: DevSyncV1" />
       <item itemvalue="Tomcat Server.Tomcat 10.1.30" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Smart Tomcat.Tomcat: DevSyncV1" />
-        <item itemvalue="JUnit.All in DevSyncV1" />
+        <item itemvalue="JUnit.UserServiceImplTest.addUser_ShouldThrowValidateObjectExeption_WhenUserIsExiste" />
+        <item itemvalue="JUnit.UserServiceImplTest" />
+        <item itemvalue="JUnit.UserServiceImplTest.addUser_ShouldThrowValidateObjectExeption_WhenUserIsEmpty" />
+        <item itemvalue="JUnit.UserServiceImplTest.addUser_ShouldThrowIllegalArgumentException_WhenUserIsNull" />
+        <item itemvalue="JUnit.UserServiceImplTest.addUser_ShouldAddUser_WhenUserIsValid" />
       </list>
     </recent_temporary>
   </component>
@@ -391,7 +460,16 @@
       <workItem from="1728972409695" duration="783000" />
       <workItem from="1728973211086" duration="1212000" />
       <workItem from="1728974498772" duration="531000" />
-      <workItem from="1728979287952" duration="3810000" />
+      <workItem from="1728979287952" duration="9512000" />
+      <workItem from="1729019156426" duration="3408000" />
+      <workItem from="1729026679563" duration="6000" />
+      <workItem from="1729066497103" duration="4271000" />
+      <workItem from="1729103780521" duration="644000" />
+      <workItem from="1729104445096" duration="1550000" />
+      <workItem from="1729106018353" duration="1248000" />
+      <workItem from="1729107302699" duration="3948000" />
+      <workItem from="1729198987177" duration="872000" />
+      <workItem from="1729277407300" duration="3437000" />
     </task>
     <servers />
   </component>
@@ -402,49 +480,9 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/youcode/DevSyncV1/repository/implementation/TaskRepositoryImpl.java</url>
-          <line>21</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/youcode/DevSyncV1/servlet/TaskServlet.java</url>
-          <line>227</line>
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/youcode/DevSyncV1/servlet/TaskServlet.java</url>
-          <line>230</line>
-          <option name="timeStamp" value="9" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/youcode/DevSyncV1/servlet/TaskServlet.java</url>
-          <line>232</line>
-          <option name="timeStamp" value="10" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/youcode/DevSyncV1/servlet/TaskServlet.java</url>
-          <line>235</line>
-          <option name="timeStamp" value="12" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/youcode/DevSyncV1/servlet/TaskServlet.java</url>
-          <line>236</line>
-          <option name="timeStamp" value="13" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/youcode/DevSyncV1/servlet/TaskServlet.java</url>
-          <line>242</line>
+          <line>240</line>
           <option name="timeStamp" value="14" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/youcode/DevSyncV1/servlet/TaskServlet.java</url>
-          <line>75</line>
-          <option name="timeStamp" value="15" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/youcode/DevSyncV1/repository/implementation/TaskRepositoryImpl.java</url>
-          <line>23</line>
-          <option name="timeStamp" value="19" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
